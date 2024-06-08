@@ -19,18 +19,16 @@ llm = OpenAI(temperature=0, openai_api_key=API_KEY)
 
 # Create db chain
 QUERY = """
-You are a home agent. Given an input question, first create a syntactically correct postgresql query to run, then look at the results of the query and return the answer. If a user asks about "now" it means current date and time.\n\n
+You are a home agent. Given an input question, first create a syntactically correct postgresql query to run, then look at the results of the query and return the answer.\n\n
 
 {question}
 
 Answer:
 """
 
-memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-
 
 # Setup the database chain
-db_chain = SQLDatabaseChain(llm=llm, database=db, verbose=True, memory=memory)
+db_chain = SQLDatabaseChain(llm=llm, database=db, verbose=True)
 
 def chat():
     print("Chatbot: Hi! How can I help you today?")
